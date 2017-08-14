@@ -29,10 +29,29 @@ namespace AdminWebForms
             var adminRepo = new Repository();
             adminRepo.OpenConnection(connection_str);
             var customers = adminRepo.SeekCustomersByParams(column, seeking);
+
+            List<Book> bksOnSeekingHands = new List<Book>();
+            List<Book> bksInOneHand;
+            SearchPackage paket;
+
+            foreach (var pt in customers)
+            {
+                paket.criterion = "BookOwnerId";
+                paket.value = pt.customer_id.ToString();
+
+                bksInOneHand = adminRepo.WantedBooksByCriterion(paket);
+                if (bksOnSeekingHands.Count == 0)
+                    bksOnSeekingHands = bksInOneHand;
+                else 
+                bksOnSeekingHands.Concat(bksInOneHand);
+            }
             adminRepo.CloseConnection();
 
-            SearchGrid.DataSource = customers;
-            SearchGrid.DataBind();
+            SearchGrid1.DataSource = customers;
+            SearchGrid1.DataBind();
+
+            SearchGrid2.DataSource = bksOnSeekingHands;
+            SearchGrid2.DataBind();
         }
         protected void Insert_link_btn_Click(object sender, EventArgs e)
         {

@@ -42,23 +42,31 @@ namespace DataModel.Infrastructure
         public List<Customer> DataReaderCustomerIteration(string sql_expression)
         {
             List<Customer> list_c = new List<Customer>();
-            using (SqlCommand select_command = new SqlCommand(sql_expression, getConnection()))
+            try
             {
-                SqlDataReader CustomersReader = select_command.ExecuteReader();
-                Customer toList;
-                while (CustomersReader.Read())
+                using (SqlCommand select_command = new SqlCommand(sql_expression, getConnection()))
                 {
-                    toList = new Customer()
+                    SqlDataReader CustomersReader = select_command.ExecuteReader();
+                    Customer toList;
+                    while (CustomersReader.Read())
                     {
-                        customer_id = Int32.Parse(CustomersReader["customer_id"].ToString()),
-                        first_name = CustomersReader["first_name"].ToString(),
-                        last_name = CustomersReader["last_name"].ToString(),
-                        login = CustomersReader["login"].ToString(),
-                        email = CustomersReader["email"].ToString(),
-                        password = CustomersReader["password"].ToString()
-                    };
-                    list_c.Add(toList);
+                        toList = new Customer()
+                        {
+                            customer_id = Int32.Parse(CustomersReader["customer_id"].ToString()),
+                            first_name = CustomersReader["first_name"].ToString(),
+                            last_name = CustomersReader["last_name"].ToString(),
+                            login = CustomersReader["login"].ToString(),
+                            email = CustomersReader["email"].ToString(),
+                            password = CustomersReader["password"].ToString()
+                        };
+                        list_c.Add(toList);
+                    }
+                    CustomersReader.Close();
                 }
+            }
+            catch (Exception e) 
+            {
+                return null;
             }
             return list_c;
         }
@@ -137,35 +145,48 @@ namespace DataModel.Infrastructure
                     break;
                 case "BookISBN": sql_expression += (" ISBN = " + "'" + packet.value + "'" );
                     break;
+                case "BookOwnerId" :
+                    sql_expression += (" owner_id = "  + packet.value );
+                    break;
             }
             return DataReaderBookIteration(sql_expression);
         }
         public List<Book> DataReaderBookIteration(string sql_expression)
         {
             List<Book> list = new List<Book>();
-            using (SqlCommand select_command = new SqlCommand(sql_expression, getConnection()))
+            try
             {
-                SqlDataReader BooksReader = select_command.ExecuteReader();
-                Book toList;
-                string client_id; 
-                while (BooksReader.Read())
+                using (SqlCommand select_command = new SqlCommand(sql_expression, getConnection()))
                 {
-                    toList = new Book()
+                Book toList;
+                string client_id;
+               
+                    SqlDataReader BooksReader = select_command.ExecuteReader();
+                    while (BooksReader.Read())
                     {
-                        book_id = Int32.Parse(BooksReader["book_id"].ToString()),
-                        author_name = BooksReader["author_name"].ToString(),
-                        book_name = BooksReader["book_name"].ToString(),
-                        ISBN = BooksReader["ISBN"].ToString(),
-                        genre = BooksReader["genre"].ToString()
-                        
-                    };
-                    client_id = BooksReader["owner_id"].ToString();
-                    if (!String.IsNullOrEmpty(client_id))
-                    {
-                        toList.owner_id = Int32.Parse(client_id);
+                        toList = new Book()
+                        {
+                            book_id = Int32.Parse(BooksReader["book_id"].ToString()),
+                            author_name = BooksReader["author_name"].ToString(),
+                            book_name = BooksReader["book_name"].ToString(),
+                            ISBN = BooksReader["ISBN"].ToString(),
+                            genre = BooksReader["genre"].ToString()
+
+                        };
+                        client_id = BooksReader["owner_id"].ToString();
+                        if (!String.IsNullOrEmpty(client_id))
+                        {
+                            toList.owner_id = Int32.Parse(client_id);
+                        }
+                        list.Add(toList);
                     }
-                    list.Add(toList);
+                    BooksReader.Close();
                 }
+                
+            }
+            catch (Exception e)
+            {
+                return null;
             }
             return list;
         }

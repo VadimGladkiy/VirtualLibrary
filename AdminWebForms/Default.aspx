@@ -26,8 +26,11 @@
         <asp:TextBox ID="Seeking_str" runat="server"></asp:TextBox>
         <asp:Button ID="Search_btn" runat="server" Text="Search" OnClick="Search_btn_Click" />
         <br />
-        <p>таблица поиска</p>
-        <asp:GridView ID="SearchGrid" runat="server"></asp:GridView>
+        <p>таблица искомых пользователей</p>
+        <asp:GridView ID="SearchGrid1" runat="server"></asp:GridView>
+        <br />
+        <p>таблица книг искомых пользователей</p>
+        <asp:GridView ID="SearchGrid2" runat="server"></asp:GridView>
         <br />
 &nbsp;<asp:GridView ID="CustomersGrid" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" DataKeyNames="customer_id" DataSourceID="SqlDataSource1" GridLines="Horizontal" Height="160px" Width="710px" AllowPaging="True" AllowSorting="True" ShowFooter="True">
             <Columns>
@@ -40,7 +43,7 @@
                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("customer_id") %>'></asp:Label>
                     </ItemTemplate>
                     <FooterTemplate>
-                        <asp:LinkButton ID="Insert_link_btn" ValidationGroup="INSERT" runat="server" OnClick="Insert_link_btn_Click">LinkButton</asp:LinkButton>
+                        <asp:LinkButton ID="Insert_link_btn" ValidationGroup="INSERT" runat="server" OnClick="Insert_link_btn_Click">Insert</asp:LinkButton>
                     </FooterTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="first_name" SortExpression="first_name">
@@ -150,7 +153,7 @@
             <SortedDescendingHeaderStyle BackColor="#275353" />
         </asp:GridView>
         <asp:ValidationSummary ID="ValidationSummary1" ValidationGroup="INSERT" runat="server" ForeColor="Red" />
-        <asp:ValidationSummary ID="ValidationSummary2" runat="server" ForeColor="Red" />
+  
         <br />
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" 
             ConnectionString="<%$ ConnectionStrings:VirtualLibraryConnectionString %>" 

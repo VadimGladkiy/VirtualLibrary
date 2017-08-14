@@ -33,9 +33,6 @@ namespace AdminWebForms
             SqlDataSource2.InsertParameters["genre"].DefaultValue =
              ((TextBox)GridView1.FooterRow.FindControl("genre_txt")).Text;
 
-            SqlDataSource2.InsertParameters["owner_id"].DefaultValue =
-             ((TextBox)GridView1.FooterRow.FindControl("owner_txt")).Text;
-
             SqlDataSource2.Insert();
         }
         protected void Search_btn_Click(object sender, EventArgs e)

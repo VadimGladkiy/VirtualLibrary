@@ -132,13 +132,6 @@
                     <ItemTemplate>
                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("owner_id") %>'></asp:Label>
                     </ItemTemplate>
-                    <FooterTemplate>
-                        <asp:TextBox ID="owner_txt" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RFV_Insert_owner" runat="server" ValidationGroup="INSERT"
-                            ErrorMessage="owner_id is a required field"
-                            ControlToValidate="owner_txt" Text="*" ForeColor="Red">
-                        </asp:RequiredFieldValidator>
-                    </FooterTemplate>
                 </asp:TemplateField>
             </Columns>
             <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
