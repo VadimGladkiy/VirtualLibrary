@@ -1,0 +1,18 @@
+﻿@model DataModel.Models.Book
+    <p class="mainListP"> Author: @Model.author_name </p>
+    <p class="mainListP"> Name: @Model.book_name </p>
+    <p class="mainListP"> ISBN: @Model.ISBN </p>
+    <div class="allowedUser" style="display:none">
+    @if (String.IsNullOrEmpty(Model.owner_id.ToString()))
+            {
+        <a href="javascript:formSpecialRequest(@Model.book_id)">to get</a>
+        //formSpecialRequest(book_id)
+    }
+    else
+    {
+        @Html.Raw("<span style=" + "color:blue " + ">item is not available to get</span>")
+    }
+    </div>
+    <br />
+    
+

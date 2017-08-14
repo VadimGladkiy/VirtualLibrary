@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/HomeIndexStyle.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+</head>
+    <body>
+    @model IEnumerable<DataModel.Models.Book>
+    <div id="handList">
+        @foreach (var pt in Model)
+        {
+            <p class="handListP"> Author: @pt.author_name </p>
+            <p class="handListP"> Name: @pt.book_name  </p>
+            <p class="handListP"> ISBN: @pt.ISBN </p>
+            <p class="handListP"> Genre: @pt.genre </p>
+            @Html.ActionLink(linkText: "returnABook",
+    actionName: "giveABook",
+    controllerName: "Customer",
+    routeValues: new { book_id = pt.book_id },
+    htmlAttributes: "");
+            <br />
+        }
+    </div>
+    @Html.ActionLink("to Home page","Index","Home")
+</body>
+</html>

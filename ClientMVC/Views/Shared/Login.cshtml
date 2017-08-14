@@ -1,0 +1,29 @@
+﻿@model string 
+<div id="logOutPart">
+    <span>@Model</span>
+    <a id="linkAccount" href= "/Customer/BooksOnHand/@ViewBag.customer_id" > my Account </a>
+    <a id="logOutLink" href="javascript:LogOutFunc()">log out</a>
+    <input type="hidden" id="customer_id" value=@ViewBag.customer_id />
+</div>
+<script type="text/javascript">
+    function LogOutFunc() {
+        var form_auto = document.getElementById('AuthorizeForm');
+        var form_inputs = document.getElementsByClassName('logInput');
+        var forms_transfer_books =
+            document.getElementsByClassName('allowedUser');
+        var customer = document.getElementById('customer_id');
+        //
+        customer.value = null;
+        for (let f of forms_transfer_books)
+        {
+            f.style.display = 'none';
+        }
+        for(let p of form_inputs)
+        {
+            console.log(p.value);
+            p.value = "";
+        }
+        document.getElementById('logOutPart').remove();
+        form_auto.style.display = 'block';
+    }
+</script>

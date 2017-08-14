@@ -1,0 +1,27 @@
+﻿
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+        log in :
+        <div id="authorizeHeader">
+            @using (Ajax.BeginForm(actionName: "Login", controllerName: "Home",
+            routeValues: "",
+            ajaxOptions: new AjaxOptions()
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "AuthorizeHeader",
+            },
+            htmlAttributes: new { id = "AuthorizeForm", style = "display:block" }))
+            {
+             <span>enter your login</span>
+             <input type="text" name="login" class="logInput" />
+             <span>enter your password</span>
+             <input type="password" name="password" class="logInput" />
+             <input type="submit" id="AuthorizeSubmit" value="log in" />
+            }
+            <div id="AuthorizeHeader"></div>
+        </div>
+        </div>
+    </div>
+</div>

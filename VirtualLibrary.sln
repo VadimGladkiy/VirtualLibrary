@@ -3,7 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientMVC", "ClientMVC\ClientMVC.csproj", "{912FC4EE-C83E-4FC3-BEA1-0D9F012556E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{905F72D0-7CFA-468F-A12F-F3EF14CC6438}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminWebForms", "AdminWebForms\AdminWebForms.csproj", "{EACE70EB-C00D-408A-821B-902643318336}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{912FC4EE-C83E-4FC3-BEA1-0D9F012556E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{912FC4EE-C83E-4FC3-BEA1-0D9F012556E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{912FC4EE-C83E-4FC3-BEA1-0D9F012556E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{905F72D0-7CFA-468F-A12F-F3EF14CC6438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{905F72D0-7CFA-468F-A12F-F3EF14CC6438}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{905F72D0-7CFA-468F-A12F-F3EF14CC6438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EACE70EB-C00D-408A-821B-902643318336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EACE70EB-C00D-408A-821B-902643318336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EACE70EB-C00D-408A-821B-902643318336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EACE70EB-C00D-408A-821B-902643318336}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

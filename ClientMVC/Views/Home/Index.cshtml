@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+@model IEnumerable<DataModel.Models.Book>
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "seekByAuthor",
+        Value = "BookAuthor"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "seekByName",
+        Value = "BookName",
+        Selected = true
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "seekByISBN",
+        Value = "BookISBN"
+    });
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VirtualLibrary</title>
+    <link href="~/Content/HomeIndexStyle.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/ScriptsFromCoder/JSHandlers.js"></script>
+</head>
+<body>
+@{Html.RenderAction("GetHeader", "Header");}
+<h2>Index</h2>
+<div id="BooksOnHand">
+</div>
+@using (Ajax.BeginForm(actionName: "BookSearching", controllerName: "Home",
+                ajaxOptions: new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "BooksOnHand",
+                    LoadingElementId = "loading",
+                    LoadingElementDuration = 1000
+                }))
+{
+    <span></span>
+    @Html.DropDownList("SearchBook", listItems)
+    <input type="text" name="seeking_str" />
+    <input type="submit" value="Search" />
+}
+<div id="loading" style="display:none; color:Red; font-weight:bold;">
+    <p>Searching...</p>
+</div>
+<div id="mainList">
+    @foreach (var p in Model)
+    {
+        { Html.RenderPartial("Home_Item", p); }
+    }
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    function formSpecialRequest(book_id){
+        alert('SP request');
+        var customer = $('#customer_id').val();
+        var request = "/Customer/takeABook/" + book_id + '/' + customer;
+        return location.href = request;
+    }
+</script>
+
